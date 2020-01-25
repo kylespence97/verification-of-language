@@ -1,0 +1,16 @@
+(modulo 
+  (modulo 
+      (modulo 
+	  (modulo 201 10) 
+	  10
+      )
+      (modulo 
+	  (modulo 201 10) 
+	  10
+      )
+  ) 
+  (modulo 
+      323 
+      (modulo 12 7)
+  ) 
+)

@@ -1,0 +1,36 @@
+;Returns 50
+
+(ifelse 
+    0
+    (ifelse
+	1
+	5
+	10
+    )
+    (ifelse
+	(ifelse
+	    1
+	    1
+	    0
+	)
+	(ifelse
+	  1
+	  (ifelse
+	      0
+	      33
+	      (ifelse
+		  1
+		  50
+		  25
+	      )
+	  )
+	  0
+	)
+	(ifelse
+	  1
+	  10
+	  0
+	)
+    ) 
+)
+

@@ -1,0 +1,9 @@
+;Returns 65536
+
+(squared  
+    (squared
+	(squared 
+	    (squared 2)
+	)
+    )
+)

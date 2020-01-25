@@ -1,0 +1,7 @@
+;Returns 256
+
+(squared  
+    (squared
+	(squared 2)
+    )
+)

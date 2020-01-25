@@ -1,0 +1,15 @@
+;Returns 10
+
+(ifelse 
+    0
+    1
+    (ifelse
+	0
+	2
+	(ifelse
+	    1
+	    10
+	    0
+	)
+    ) 
+)

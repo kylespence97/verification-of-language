@@ -1,0 +1,10 @@
+(ifelse 
+  (equal 
+     (factorial 
+	(squared 2)
+     ) 
+     24
+  ) 
+  (quot 5 2) 
+  0
+)

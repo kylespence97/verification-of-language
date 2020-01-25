@@ -1,0 +1,30 @@
+function factorial (n : Z) : Z
+	//the loop counter within this function, i which becomes n, decrements towards 1 so cannot be less than this, 0 is also a valid case for factorials
+	precondition n >= 0
+	//the return value of this function must be factorial of the input value
+	//postcondition factorial = n! 
+	var i : Z
+	var ans : Z
+begin
+	i := n
+	//i must be equal to its assigned value of n, which must match the precondition
+	{i = n /\ n >= 0}
+	ans := 1
+	//additionally, ans must now be equal to its assigned value of 1
+	{i = n /\ n >= 0 /\ ans = 1}
+	while i != 1 do
+	//upon entering the loop, the invariant must be true and i must be greater than or equal to the terminate condition (alongside n satisfying the functions precondition)
+	//invariant (ans * i! = n! /\ i >= 1 /\ n >= 0) 
+	begin
+		ans := ans * i
+		//following this assignment, the invariant must be true when i (which is now greater than 1) is decremented and n is still greater than or equal to 0 
+		//{ans * (i - 1)! = n! /\ i > 1 /\ n >= 0} 
+		i := i - 1
+		//upon exiting the loop, the conditions for which the loop was entered must be matched (invariant)
+		//{ans * i! = n! /\ i >= 1 /\ n >= 0}
+		skip
+	end
+//the value that will be returned must now satisfy the precondition, the loop invariant must be true and the loop terminate condition must be true	
+//{factorial = n! /\ ans * i! = n! /\ (i = 1 \/ i = 0)}
+factorial := ans
+end

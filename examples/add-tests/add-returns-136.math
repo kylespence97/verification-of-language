@@ -1,0 +1,36 @@
+;Returns 60
+
+(add
+  (add
+    (add 
+	 (add 
+	    (add 5 4)
+	    (add 10 10)
+	 )
+	 (add 
+	    (add 5 4)
+	    (add 10 10)
+	 )
+    )  
+    (add 
+	 1 
+	 (add 5 4)
+    ) 
+  )
+  (add
+    (add 
+	 (add 
+	    (add 5 4)
+	    (add 10 10)
+	 )
+	 (add 
+	    (add 5 4)
+	    (add 10 10)
+	 )
+    )  
+    (add 
+	 1 
+	 (add 5 4)
+    ) 
+  )
+)

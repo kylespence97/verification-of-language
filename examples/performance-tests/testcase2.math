@@ -1,0 +1,7 @@
+(add 
+  (add 
+    (factorial 5) 
+    (squared 5)
+  ) 
+  (tri 5)
+)

@@ -1,0 +1,11 @@
+(ifelse 
+  (equal 
+    (mult 1 2) 
+    3
+  ) 
+  0 
+  (modulo 
+    (quot 30 2) 
+    6
+  )
+)

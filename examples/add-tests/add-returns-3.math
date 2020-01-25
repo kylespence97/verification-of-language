@@ -1,0 +1,4 @@
+;Returns 3
+
+(add 1 2)
+

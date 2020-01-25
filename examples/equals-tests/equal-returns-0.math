@@ -1,0 +1,52 @@
+(equal 
+  (equal 
+    (equal 
+      (equal  
+	(equal 
+	  (equal 91 2) 
+	  (equal 1 1)
+	)  
+	(equal 
+	  (equal 1 1) 
+	  (equal 2 3)
+	)
+      ) 
+      (equal  
+	(equal 1 4)  
+	(equal 3 2)
+      )
+    ) 
+    (equal 
+      (equal  
+	(equal 
+	  (equal 100 100) 
+	  (equal 21 21)
+	)  
+	(equal 
+	  (equal 31 21) 
+	  (equal 41 11)
+	)
+      ) 
+      (equal  
+	(equal 11 11)  
+	(equal 11 12)
+      )
+    ) 
+  )
+ (equal 
+      (equal  
+	(equal 
+	  (equal 13 12) 
+	  (equal 19 19)
+	)  
+	(equal 
+	  (equal 134 123) 
+	  (equal 41 41)
+	)
+      ) 
+      (equal  
+	(equal 1 1)  
+	(equal 1 1)
+      )
+    ) 
+)

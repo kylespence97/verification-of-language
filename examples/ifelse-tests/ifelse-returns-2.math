@@ -1,0 +1,3 @@
+;Returns 2
+
+(ifelse 1 2 3)
