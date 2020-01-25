@@ -1,0 +1,37 @@
+//Implement the reusable annotation isEqual, which is used within the if
+predicate isEqual (left: Z, right: Z) = (left - right = 0)
+
+function equal(x : Z, y : Z) : Z
+precondition y >= 0 /\ x >= 0 
+postcondition equal = 0 \/ equal = 1
+var left: Z
+	right: Z
+	sum : Z
+	result : Z
+begin
+	left := x
+	//At this stage in the program, we know that x and y must be greater than 0 and that left is now equal to x because of the 
+	//previous assignment
+	{left = x /\ x >= 0 /\ y >= 0}
+	right := y
+	{right = y /\ left = x /\ x >= 0 /\ y >= 0}
+	//At this stage in the program, we know that x and y must be greater than 0, that left is now equal to x because of the 
+	//previous assignment and that right is now equal to y.
+	result := 0
+	{result = 0 /\ right = y /\ left = x /\ x >= 0 /\ y >= 0}
+	
+	sum := left - right 
+	{sum = left - right /\ result = 0 /\ right = y /\ left = x /\ x >= 0 /\ y >= 0}
+	
+	if (sum = 0) then 
+	begin
+		 result := 1
+		 {isEqual(left, right) /\ result = 1}
+		 //In the above assesion, you can see that how the prodicate has been implemented.
+		 skip
+	end 
+	{(result = 0 \/ result = 1)}
+	equal := result 
+	{equal = result /\ (result = 0 \/ result = 1)}
+	skip
+end 

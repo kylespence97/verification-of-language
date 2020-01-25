@@ -1,0 +1,152 @@
+
+{x >= 0 /\ y > 0}
+  r := x;
+  q := 0;
+  WHILE r >= y DO
+      q := q + 1;
+      r := r - y
+  LOOP
+{r = x - (q * y)}
+
+            Sequencing rule
+            We must now prove the following ('I' represents loop invariant):
+            1) {I}WHILE r >= y DO q := q + 1; r := r - y LOOP{r = x - (q * y)}
+            2) {Q}q := 0{I}
+            3) {x >= 0 /\ y > 0}r := x{Q}
+
+1)
+
+    {I}
+    WHILE r >= y DO
+	q := q + 1;
+	r := r - y
+    LOOP
+    {r = x - (q * y)}
+
+	    While rule/Postcondition weakening
+	    We must now prove the following:
+	    1.1) {I /\ r >= y}q := q + 1; r := r - y{I}
+	    1.2) [I /\ ¬(r >= y)] -> [r = x - (q * y)]
+
+1.1)
+
+    {I /\ r >= y}
+      q := q + 1;
+      r := r - y
+    {I}
+
+	    Select loop invariant I:
+            I = [r = x - (q * y)]
+
+    {r = x - (q * y) /\ r >= y}
+      q := q + 1;
+      r := r - y
+    {r = x - (q * y)}
+
+            {Sequencing rule}
+            We must now prove the following:
+            1.1.1) {R}r := r - y{r = x - (q * y)}
+            1.1.2) {r = x - (q * y) /\ r >= y}q := q + 1{R}
+
+1.1.1)
+
+    {R}
+      r := r - y 
+    {r = x - (q * y)}
+
+	{Assignment axiom}
+
+	R = (r = x - (q * y))[r - y/r] = [r - y = x - (q * y)]
+
+        We have obtained R
+
+1.1.2)
+
+    {r = x - (q * y) /\ r >= y}
+      q := q + 1
+    {r - y = x - (q * y)}
+
+        {Assignment axiom}
+
+	(r - y = x - (q * y))[q + 1/q]
+
+        Expand substitution
+
+	[r - y = x - ((q + 1) * y)]
+
+        Arithmetic
+
+	[r = x - (q * y)]
+
+            {Precondition strengthening}
+            We must now prove the following:
+            1.1.2.1) P = [r = x - (q * y) /\ r >= y] 
+                     P' = [r = x - (q * y)]
+                     P -> P'
+
+1.1.2.1)
+
+      [r = x - (q * y) /\ r >= y] -> [r = x - (q * y)]
+
+      Pure logic
+
+      True
+
+1.2)
+
+      [r = x - (q * y) /\ ¬(r >= y)] -> [r = x - (q * y)]
+
+      Pure logic
+
+      [r = x - (q * y)] -> [r = x - (q * y)]
+
+      Reflexivity of implication
+
+      True
+
+2)
+
+    {Q}
+      q := 0
+    {r = x - (q * y)}
+
+
+      {Assignment axiom}
+
+      Q = (r = x - (q * y))[0/q] = [r = x]
+
+      We have obtained Q
+
+3)
+
+      {x >= 0 /\ y > 0}
+	r := x
+      {x = r}
+
+            {Assignment axiom}
+
+	    (x = r)[x/r]
+
+            Expand substitution
+
+	    r = r
+
+            Simplify
+
+	    True
+
+            {Precondition strengthening}
+            We must now prove the following:
+            3.1) P = x >= 0 /\ y > 0
+                 P' = True
+                 P -> P'
+
+3.1)
+
+    [x >= 0 /\ y > 0] -> [True]
+
+     Pure logic
+
+     True
+
+     {Q.E.D}

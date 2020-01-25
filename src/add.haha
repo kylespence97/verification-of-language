@@ -1,0 +1,24 @@
+function add (x : Z, y : Z) : Z
+precondition y >= 0 // Ensure that the precondition of y>= 0 is held. Without this being true, the program will not terminate.
+postcondition add = x + y
+var ans : Z
+    n : Z
+begin
+	ans := x
+	{ y >= 0 /\ ans = x } // Carry the precondition through, and assert that the new assignment holds.
+	n := y
+	{ y >= 0 /\ n >= 0 /\ ans = x /\ n = y } // Carry the above, and assert on the new assignments.
+	while n != 0 do // 
+	invariant y >= 0 /\ n >= 0 /\ ans + n = x + y // Assert our loop invariant from our pen and paper proofs.
+	begin
+		ans := ans + 1
+		{ y >= 0 /\ n > 0 /\ ans + n - 1 = x + y } // loop invariant doesn't hold here, modify slightly to account for this intermediate step.
+		n := n - 1
+		{ y >= 0 /\ n >= 0 /\ ans + n = x + y } // loop logic is finished, our invariant should hold again.
+		skip
+	end
+	// Ensure loop invariant still holds
+	{ n = 0 /\ ans + n = x + y }
+	add := ans
+end
+

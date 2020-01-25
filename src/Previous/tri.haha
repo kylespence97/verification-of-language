@@ -1,0 +1,41 @@
+
+function tri (n : Z) : Z
+precondition n >= 0
+postcondition tri = (n * (n + 1)) / 2
+var i : Z
+	ans : Z
+begin
+	i := n
+	//After the above assignment has been executed, we know that i will now equal n and that the fomulea defined in the precondition will 
+	//still hold.
+	{i = n /\ n >= 0}
+	ans := 0
+	//Once "ans := 0" has been executed, we will now know that ans is equal to 0 and the previous assersions will still hold. 
+	{i = n /\ n >= 0 /\ ans = 0}
+	while i != 0 do
+	invariant ((i * (i + 1)) / 2) + ans = (n * (n + 1)) / 2 /\ i >= 0 /\ n >= 0
+	//We have declared our loop invarient, which is "((i * (i + 1)) / 2) + ans = (n * (n + 1))" and we carry over "n >= 0" which is has 
+	//been defined in the precondition formulea. At this point in the loop we also know that i will either be greater than 0 or equal too. 
+	//This will be dependent one where it is at during the loops execution.  
+	begin
+		ans := ans + i
+		{(((i - 1) * i) / 2) + ans = (n * (n + 1)) / 2  /\ i > 0 /\ n >= 0 }
+		//In the above assersion, we subtract 1 from the value of i as the value of ans has now increased, which will ensure the invarient still holds. 
+		//Another implementation could be to subtract i from ans, which would also produce the same result. Also, because we are in the 
+		//loop we will know that i will be greater than 0 and our pre-condition formulea will still hold.
+		i := i - 1	
+		{((i * (i + 1)) / 2) + ans = (n * (n + 1)) / 2 /\ i >= 0 /\ n >= 0}
+		//At this point in the loop, our declared invarient will still hold, as well as the precondition formulea. However, the value 
+		//of i will either be greater than or equal to 0 be depending on where it is at during the loops execution. 
+		skip 
+	end
+	{ans = (n * (n + 1)) / 2 /\ (n * (n + 1)) / 2 = ((i * (i + 1)) / 2) + ans /\ i = 0}
+	//Once the loop has been exectuted, we define that ans is equal to the triangular number of n and that our loop invarient will still 
+	//hold. Also, at this point we will know that i is equal to 0 because the loop has now executed. 
+	tri := ans
+end
+
+//___________________________________________________________________________________________
+
+
+

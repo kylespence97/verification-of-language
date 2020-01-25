@@ -1,0 +1,42 @@
+function quot (x : Z, y : Z) : Z
+precondition x >= 0 /\ y > 0
+
+var r : Z
+	q : Z
+begin
+	r := x
+	//After the execution of the the assignment above, r will now be equal to x and the condition defined by the pre-condition will 
+	//still be valid.
+	{r = x /\ x >= 0 /\ y > 0}
+	q := 0
+	//When the instruction q = 0 is executed, q will now be equal to 0 and the previous assersions are then carried over.
+	{q = 0 /\ r = x /\ x >= 0 /\ y > 0}
+	while r >= y do
+	invariant x = (q * y) + r /\ x >= 0 /\ y > 0 
+	//The loop invarient is then defined as "x = (q * y) + r" and the assersion made in the precondition formulea are then declared
+	//because they will stil be valid when the loop is entered. 
+	begin
+		q := q + 1
+		{x = (q * y) + (r - y) /\ r >= y /\ x >= 0 /\ y > 0 }
+		//At this point we must subtract y from r because the value of q has been increased, performing this subtraction will 
+		//ensure that the overall calculation will still equal the x parameter and that the consition is still true. Another assersion could subtract 1 from q
+		//which would also produce the same result. At this point in the while,  r >= y will still be true while we are at this point in the loop. 
+		r := r - y	
+		{x = (q * y) + r /\ x >= 0 /\ y > 0 }
+		//The above line shows that the once the two instructions within while are executed, the invarient will still be valid/true.
+		//Also, the formulea declared in the precondition will still be valid. 
+		skip 
+	end
+	{x = (q * y) + r /\ r < y /\ x >= 0 /\ y > 0}
+	//Once we have exited the loop, the invarient will still hold and the value of r will now be less that y because we have now exited
+	//the loop. The fomulae within the pre-condition will also still be valid. 
+	quot := q
+	//In this proof the post condition is defined here to allow access to r, which represents (x mod y). We have added skip to allow the 
+	//post condition to be inserted into the logic of the function. 
+	{x = (quot * y) + r}
+	skip
+end
+
+
+
+

@@ -1,0 +1,152 @@
+{n > 0}	
+  i := n;
+  ans := 0
+  
+  WHILE i > 0 DO
+	  ans := ans + n; 
+	  i := i - 1
+  LOOP
+{ans = n * n}
+	
+
+	    {Sequencing Rule}
+	    - We must prove the following, with I being the invarient 
+	    1) {I} WHILE i > 0 DO ans := ans + value; i := i - 1 LOOP {ans = n * n}
+	    2) {Q} ans := 0 {I}
+	    3) {n > 0} i := n; {Q}
+
+1)
+	{I}
+	WHILE i > 0 DO
+		ans := ans + n; 
+		i := i - 1
+	LOOP
+	{ans = n * n}
+
+	      {While Rule and Post Condition Weakening}
+	      1.1) {I /\ i > 0} ans := ans + n; i := i - 1 {I}
+	      1.2) {I /\ Â¬(i > 0)} -> {ans = n * n}
+
+1.1)
+
+	{I /\ i > 0} 
+	  ans := ans + n; 
+	  i := i - 1 
+	{I}
+
+	
+		Select the loop invarient (I):
+		I = [(n * i) + ans = n * n]
+
+	{(n * i) + ans = n * n /\ i > 0} 
+	  ans := ans + n; 
+	  i := i - 1 
+	{(n * i) + ans = n * n}
+
+		{Sequencing Rule}
+		- We now need to prove the following:
+		1.1.1) {R} i := i - 1 {(n * i) + ans = n * n}
+		1.1.2) {(n * i) + ans = n * n /\ i != 0} ans := ans + n; {R}
+
+1.1.1)
+
+	{R} 
+	    i := i - 1 
+	{(n * i) + ans = n * n}
+
+
+		{Assignment Axiom}
+		
+		R = ((n * i) + ans = n * n)[i - 1/i]
+		R = ((n * (i - 1)) + ans = n * n)
+
+		We have obtained R
+1.1.2)
+
+	{(n * i) + ans = n * n /\ i != 0}
+	    ans := ans + n; 
+	{(n * (i - 1)) + ans = n * n}
+
+		{Assignment Axiom}
+		((n * (i - 1)) + ans = n * n)[ans + n/ans]
+
+		Expand substitution
+		(n * (i - 1)) + (ans + n) = n * n
+
+		{Pre. Condition Str}
+		We now must prove the following:
+		1.1.2.1) P = [(n * i) + ans = n * n /\ i > 0] 
+			 P' = [(n * (i - 1)) + (ans + n) = n * n]
+			 P -> P'
+	
+1.1.2.1)
+
+	[(n * i) + ans = n * n /\ i > 0] -> [(n * (i - 1)) + (ans + n) = n * n]
+										
+	{Pure Logic}
+
+	True 
+
+1.2)
+
+	{(n * i) + ans = n * n /\ Â¬(i > 0)} -> {ans = n * n}
+
+	{Pure Logic}
+
+	True
+
+2)
+	
+	{Q} 
+	  ans := 0 
+	{(n * i) + ans = n * n}
+
+		{Assignment Axiom}
+		
+		Q = ({(n * i) + ans = n * n})[0/ans]
+		Q = ({(n * i) + 0 = n * n})
+
+		{Simplification}
+
+		Q = ({(n * i) = n * n})
+
+		We have obtained Q
+
+3)
+	
+	{n > 0} 
+	  i := n; 
+	{(n * i) = n * n}
+
+		{Assignment Axiom}
+
+		Q = ((n * i) = n * n)[n/i]
+		Q = ((n * n) = n * n)
+
+		{Simplification}
+
+		{n * n = n * n}
+
+		{Reflexivity}
+
+		True
+		
+		{Pre. Condition Str}
+		We must prove the following:
+		3.1) P = n > 0
+			 P' = True
+			 P -> P'
+
+3.1)
+	
+	{n > 0} -> {True}
+
+	True
+
+	{Q.E.D}
+
+
+		
+		
+
+

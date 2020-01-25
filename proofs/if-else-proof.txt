@@ -1,0 +1,61 @@
+
+{p = 0 \/ p = 1}	
+  ans := y
+
+  IF p = 1 THEN
+    ans := x
+{(p = 0 /\ ans = y) \/ (p = 1 /\ ans = x)}
+	
+    {Sequencing Rule}	
+    We must prove the following:
+    1) {Q} IF p = 1 THEN ans := x {(p = 0 /\ ans = y) \/ (p = 1 /\ ans = x)}
+    2) {p = 0 \/ p = 1} ans := y {Q}
+
+1)
+    {Q} 
+	IF p = 1 THEN 
+	  ans := x 
+    {(p = 0 /\ ans = y) \/ (p = 1 /\ ans = x)}
+
+	{Conditional Rule}
+	1.1)
+	      {Q /\ p = 1}
+		      ans := x
+	      {(p = 0 /\ ans = y) \/ (p = 1 /\ ans = x)}
+
+	      {Assignment Axiom}
+	      Q = ((p = 0 /\ ans = y) \/ (p = 1 /\ ans = x))[x/ans]
+	      Q = ((p = 0 /\ ans = y) \/ (p = 1 /\ x = x))
+	      Q /\ p = T
+
+	1.2)
+	      [(p = 0 /\ ans = y) \/ (p = 1 /\ x = x) /\ p = 0] -> [(p = 0 /\ ans = y) \/ (p = 1 /\ ans = x)]
+
+	      {Simplify}
+      
+	      [(p = 0 /\ ans = y)] -> [(p = 0 /\ ans = y) \/ (p = 1 /\ ans = x)]
+
+	      {Pure Logic}
+	      
+	      T
+
+2)
+    {p = 0 \/ p = 1}	
+	    ans := y
+    {(p = 0 /\ ans = y) \/ (p = 1 /\ x = x)}
+
+
+	{Assignment Axiom}
+	
+	(p = 0 /\ ans = y) \/ (p = 1 /\ x = x)[y/ans]
+	= (p = 0 /\ y = y) \/ (p = 1 /\ x = x)[y/ans]
+
+	{Simplification}
+
+	T
+	
+
+		
+		
+
+

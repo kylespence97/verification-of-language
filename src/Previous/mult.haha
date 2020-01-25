@@ -1,0 +1,41 @@
+
+function mult (x : Z, y : Z) : Z
+precondition y >= 0
+postcondition mult = x * y
+var i : Z
+	ans : Z
+begin
+	i := y
+	//After execution of the above assignment, we know i is equal to y and y must be greater than or equal to 0 as this is defined 
+	//in the pre condition.
+	{i = y /\ y >= 0}
+	ans := 0
+	//Once executing this instruction, we now know that ans will be equal to 0 and we carry over the previous assersions that were made
+	//from the execution of the last instruction.
+	{i = y /\ y >= 0 /\ ans = 0}
+	while i != 0 do
+	invariant (i * x) + ans = x * y /\ i >= 0 /\ y >= 0
+	//We have now defined our invarient for the loop, which is "(i * x) + ans = x * y". We also know that y must be greater than 0 and 
+	//i may be greater than or equal to 0 at this position in the loop. 
+	begin
+		ans := ans + x
+		{((i - 1) * x) + (ans) = x * y /\ i > 0 /\ y >= 0 }
+		//At this stage we must subtract 1 from i because the value of ans is no longer 0 and is now the value of x. Performing this subtraction on i before
+		//multiplying it with x will then mean that when ans is added, our invarient still holds. The same result may be produced by subtracting x from ans.
+		//Also, Notice i is greater than 0, this is because if we have hit this stage in the loop we know that i must be greater than 0.
+		i := i - 1	
+		{(i * x) + ans = x * y /\ i >= 0 /\ y >= 0}
+		//The assersion above shows that the invarient is still valid after the above instuction have been executed. At this stage, i may be 
+		//equal to or greater than 0 depending on where it is at in the loops execution. 
+		skip 
+	end
+	{ans = x * y /\ x * y = (i * x) + ans /\ i = 0}
+	//After the loop is completed, the invarient will still be valid and the value of ans will be equal to the multiplication of x and y.
+	//However, i will now be equal to 0 because we have exited the loop. 
+	mult := ans
+end
+
+//__________________________________________________________________
+
+
+

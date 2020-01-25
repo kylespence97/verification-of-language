@@ -1,0 +1,122 @@
+{y >= 0 /\ x >= 0}
+  left := x
+  right := y
+  result := 0
+
+  sum := left - right
+
+  IF sum = 0
+    result := 1
+{result = 0 \/ result = 1}
+
+    {Sequencing rule}
+    We must now prove the following: 
+    Letters S, R, M and W have been added to identify the value we are obtaining 
+    1) {Q} IF sum = 0 result := 1 {result = 0 \/ result = 1}
+    2) {R} sum := left - right {Q}
+    3) {S} result := 0 {R}
+    4) {M} right := y {S}
+    5) {W} left := x {M} 
+
+1)
+
+    {Q} 
+      IF sum = 0  
+	result := 1  
+    {result = 0 \/ result = 1}
+
+    {Conditional Rule}
+    
+    1.1)
+
+	{Q /\ sum = 0}
+	  result := 1
+	{(sum = 0 /\ result = 1) \/ (¬(sum = 0) /\ result = 0)}
+
+	{Assignment Axiom}
+
+	Q = (sum = 0 /\ result = 1) \/ (¬(sum = 0) /\ result = 0)[result / 1]
+	  = [(sum = 0 /\ 1 = 1) \/ (¬(sum = 0) /\ result = 0)]
+
+    1.2)
+	[((sum = 0 /\ 1 = 1) \/ (¬(sum = 0) /\ result = 0) /\ ¬(sum = 0))] ->
+	  [(sum = 0) /\ result = 1) \/ (¬(sum = 0) /\ result = 0)]
+	  
+	Simplify
+
+	(¬(sum = 0) /\ result = 0) -> [(sum = 0) /\ result = 1) \/ (¬(sum = 0) /\ result = 0)]
+
+	Pure logic
+
+	True
+
+2)
+
+    {R}
+      sum := left - right
+    {(sum = 0 /\ 1 = 1) \/ (¬(sum = 0) /\ result = 0)}
+
+      {Assignment axiom}
+
+      R = ((sum = 0 /\ 1 = 1) \/ (¬(sum = 0) /\ result = 0))[left - right/sum]
+      R = ((left - right = 0 /\ 1 = 1) \/ (¬(left - right = 0) /\ result = 0))
+      
+      We have obtained R
+      
+3)
+    {S} 
+	result := 0 
+    {(left - right = 0 /\ 1 = 1) \/ (¬(left - right = 0) /\ result = 0)}
+  
+     {Assignment Axiom}
+     
+      S = ((left - right = 0 /\ 1 = 1) \/ (¬(left - right = 0) /\ result = 0))[0/result]
+      S = ((left - right = 0 /\ 1 = 1) \/ (¬(left - right = 0) /\ 0 = 0))
+      
+      We have obtained S
+      
+ 4)
+      {M} 
+	right := y 
+      {(left - right = 0 /\ 1 = 1) \/ (¬(left - right = 0) /\ 0 = 0)}
+      
+	  {Assignment Axiom}
+	  
+	  M = ((left - right = 0 /\ 1 = 1) \/ (¬(left - right = 0) /\ 0 = 0))[y/right]
+	  M = ((left - y = 0 /\ 1 = 1) \/ (¬(left - y = 0) /\ 0 = 0))
+	  
+	  We have obtained M
+5)
+    
+    {W} 
+      left := x 
+    {(left - y = 0 /\ 1 = 1) \/ (¬(left - y = 0) /\ 0 = 0)} 
+    
+	{Assignment Axiom}
+	
+	W = (left - y = 0 /\ 1 = 1) \/ (¬(left - y = 0) /\ 0 = 0)[x/left]
+	W = ((x - y = 0 /\ 1 = 1) \/ (¬(x - y = 0) /\ 0 = 0))
+	
+	{Simplify}
+	
+	= (x - y = 0) \/ (¬(x - y = 0))
+	= T	
+	
+	We we have obtained W
+
+	5.1) Pre. Condition Str
+	    P = [y >= 0 /\ x >= 0]
+	    P' = [T]
+	    P -> P'
+	    
+5.1)
+    [y >= 0 /\ x >= 0] -> [T]
+    
+    {Pure Logic}
+    
+    True
+
+    {Q.E.D}
+      
+      
+  

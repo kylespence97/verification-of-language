@@ -1,0 +1,31 @@
+function squared(n : Z) : Z
+//the loop counter within this function, i which becomes n, has a terminate condition of !(i > 0), so cannot start less than 0
+precondition n > 0 
+var i : Z
+	ans : Z
+begin 
+	i := n
+	//i must be equal to its assigned value of n, which must match the precondition
+	{n > 0 /\ i = n /\ i > 0}
+	ans := 0
+	//additionally, ans must now be equal to its assigned value of 0
+	{ans = 0 /\ n > 0 /\ i = n /\ i > 0}
+	while(i > 0) do 
+	//upon entering the loop, the invariant must be true, the precondition must be met and the terminate condition must be greater than or equal to 0
+	invariant (n * i) + ans = n * n /\ n > 0 /\ i >= 0
+	begin 
+		ans := ans + n
+		//following this assignment, the invariant must be true when i (which is greater than 0) is decremented and n is still greater than 0 
+		{(n * (i - 1)) + ans = n * n /\ n > 0 /\ i > 0}
+		i := i - 1
+		//upon exiting the loop, the conditions for which the loop was entered must be matched (invariant)
+		{(n * i) + ans = n * n /\ n > 0 /\ i >= 0}
+		skip
+	end 
+	//the value that will be returned must now satisfy the precondition, the loop invariant must be true and the loop terminate condition must be true 
+	{(n * i) + ans = n * n /\ ans > 0 /\ i = 0 /\ n > 0}
+	squared := ans
+	//following this assignment and the assertions above, this now represents our postcondition
+	{squared = n * n /\ n > 0 /\ (n * i) + ans = n * n /\ ans > 0 /\ i = 0 /\ n > 0}
+	skip
+end

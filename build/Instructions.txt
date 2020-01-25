@@ -1,0 +1,8 @@
+Open exec.sh in a text editor and change the script to be ran 
+(i.e. java -jar capriccio.jar ../examples/add.math) -> java -jar capriccio.jar ../examples/myscript.math
+
+Simply run the bash script as follows:
+
+time exec.sh
+
+The 'real' time value is what we want to look at here.

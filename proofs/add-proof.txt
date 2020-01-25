@@ -1,0 +1,154 @@
+{y > 0}
+  ans := x;
+  n := y
+  WHILE n != 0 DO
+    ans := ans + 1;
+    n := n - 1
+  LOOP
+{ans = x + y}
+
+    {Sequencing rule}
+    We must now prove the following ('I' represents loop invariant):
+
+    1) {I} WHILE n != 0 DO ans := ans + 1; n := n - 1 LOOP {ans = x + y}
+    2) {Q} n := y {I}
+    3) {y >= 0} ans := x {Q}
+
+1)
+
+    {I}
+    WHILE n != 0 DO
+      ans := ans + 1;
+      n := n - 1
+    LOOP
+    {ans = x + y}
+
+    {While rule / Postcondition weakening}
+    We must now prove the following:
+
+    1.1) {I /\ n != 0} ans := ans + 1; n := n - 1 {I}
+    1.2) [I /\ ¬(n != 0)] -> [z = x + y]
+
+1.1)
+
+    {I /\ n != 0} 
+      ans := ans + 1; 
+      n := n - 1 
+    {I}
+
+    Select loop invariant I:
+    I = [ans + n = x + y]
+
+    {ans + n = x + y /\ n != 0} 
+      ans := ans + 1; 
+      n := n - 1 
+    {ans + n = x + y}
+
+    {Sequencing Rule}
+    We must now prove the following:
+
+    1.1.1) {R} n := n - 1 {ans + n = x + y}
+    1.1.2) {ans + n = x + y /\ n != 0} z := z + 1 {R}
+
+1.1.1)
+
+    {R}
+      n := n - 1 
+    {ans + n = x + y}
+
+      {Assignment Axiom}
+
+      R = (ans + n = x + y)[n - 1 / n] = [ans + (n - 1) = x + y]
+    
+    We have obtained R
+
+1.1.2) 
+
+    {ans + n = x + y /\ n != 0}
+      z := z + 1 
+    {ans + (n - 1) = x + y}
+
+    {Assignment Axiom}
+
+    (ans + n - 1 = x + y)[ans + 1 / ans]
+
+    Expand substitution
+
+    [ans + 1 + n - 1 = x + y]
+
+    Arithmetic
+
+    [ans + n = x + y]
+
+    {Precondition Strengthening}
+    We must now prove the following: 
+    1.1.2.1) P  = [ans + n = x + y /\ n != 0]
+	     P' = [ans + n = x + y]
+	     P  -> P'
+
+1.1.2.1)
+
+    [ans + n = x + y /\ n != 0] -> [ans + n = x + y]
+
+    Pure logic
+
+    True
+
+1.2)
+
+    [ans + n = x + y /\ ¬(n != 0)] -> [ans + n = x + y]
+
+    Pure logic
+
+    [ans = x + y] -> [ans = x + y]
+
+    Reflexivity of implication
+
+    True
+
+2)
+
+    {Q}
+      n := y
+    {ans + n = x + y}
+
+    {Assignment Axiom}
+
+    Q = (ans + n = x + y)[y / n] = [ans + y = x + y]
+
+    We have obtained Q
+
+3)
+
+    {y >= 0}
+      ans := x
+    {ans + y = x + y}
+
+    {Assignment Axiom}
+
+    (ans + y = x + y)[x / ans]
+
+    Expand Substitution
+
+    x + y = x + y
+
+    Reflexivity of implication
+
+    True
+
+    {Precondition strengthening}
+    We must now prove the following:
+
+    3.1) P  = y >= 0
+	 P' = True
+	 P  -> P'
+
+3.1)
+
+    [y >= 0] -> [True]
+
+    Pure logic
+
+    True
+
+    {Q.E.D}
